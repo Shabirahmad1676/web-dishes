@@ -4,6 +4,8 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import Recommended from "./Recommended";
 import Search from "./Search";
 import { TbSalt } from "react-icons/tb";
+import Header from "./Header";
+import { RiCloseFill } from "react-icons/ri";
 
 const Showcase = () => {
   const [input, setInput] = useState("");
@@ -81,12 +83,15 @@ const Showcase = () => {
   }, [ingredients, recommended, favourite]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex flex-col items-center text-white font-sans p-6">
-      <h1 className="text-5xl font-extrabold mb-8">🍽Dish Recommender</h1>
+    <div className="min-h-screen  flex flex-col items-center text-white font-sans p-6">
+      {/* <Header/> */}
 
-      <form
+    <div className="rounded-lg mb-4 h-48 bg-white p-4 shadow-lg">
+    <h1 className="text-3xl text-black font-extrabold  mb-4">🍽What's you have in Kitchen</h1>
+
+    <form
         onSubmit={handleForm}
-        className="flex flex-col md:flex-row gap-4 items-center justify-center mb-8"
+        className="flex flex-col md:flex-row mb-4 gap-4 items-center  justify-center w-[990px]"
       >
         <input
           type="text"
@@ -94,40 +99,43 @@ const Showcase = () => {
           value={input}
           onChange={handleChange}
           required
-          className="w-full md:w-80 p-3 rounded-lg border border-gray-300 text-black focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="w-full  p-3 rounded-lg border border-gray-300 text-black focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
         <button
           type="submit"
-          className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+          className="bg-emerald-500 hover:bg-green-600 text-black p-3 rounded-lg  transition-transform transform hover:scale-105"
         >
-          Add Ingredient
+          Add
         </button>
       </form>
 
-      {error && <p className="text-red-500 text-lg mb-4">{error}</p>}
-
-      <div className="w-full max-w-2xl bg-white rounded-lg shadow-lg p-6 text-black mb-8">
-       <div className="flex justify-center items-baseline">
-       <h2 className="text-3xl font-semibold mb-4 text-center">  Your Ingredients  </h2>
-       <TbSalt className="text-2xl font-bold"/>
-       </div>
+      <div className=" text-black">
+       {/* <div className="flex justify-center items-baseline"> */}
+       {/* <h2 className="text-3xl font-semibold mb-4 text-center">  Your Ingredients  </h2> */}
+       {/* <TbSalt className="text-2xl font-bold"/> */}
+       {/* </div> */}
         <div className="flex flex-wrap gap-4">
           {ingredients.map((ingredient, index) => (
             <div
               key={index}
-              className="flex items-center bg-gray-100 p-3 rounded-lg border shadow-sm"
+              className="flex items-center bg-sky-200 p-3 rounded-lg  shadow-sm"
             >
               <span className="mr-3">{ingredient}</span>
               <button
                 onClick={() => removeIngredient(index)}
                 className="text-red-500 hover:text-red-700"
               >
-                ❎
+                <RiCloseFill className="text-2xl" />
               </button>
             </div>
           ))}
         </div>
       </div>
+
+    </div>
+      {error && <p className="text-red-500 text-lg mb-4">{error}</p>}
+
+      
 
       <Recommended  recommended={recommended} favourite={favourite} toggleFavourite={toggleFavourite} />
       <Search />
